@@ -1,8 +1,8 @@
 const Record = require('../models/Record');
 
-// @desc    Get dashboard summary statistics
-// @route   GET /api/dashboard/summary
-// @access  Private (Analyst, Admin)
+// Get dashboard summary statistics
+//GET /api/dashboard/summary
+//Private (Analyst, Admin)
 exports.getSummary = async (req, res, next) => {
   try {
     const totalIncomeResult = await Record.aggregate([

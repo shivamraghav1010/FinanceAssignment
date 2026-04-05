@@ -1,0 +1,365 @@
+{
+   "info": {
+      "name": "CapitalGuard API",
+      "description": "Finance Data Processing and Access Control Backend endpoints.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "_exporter_id": "39141013"
+   },
+   "item": [
+      {
+         "name": "1. Authentication",
+         "item": [
+            {
+               "name": "Register User",
+               "request": {
+                  "method": "POST",
+                  "header": [
+                     {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                     }
+                  ],
+                  "body": {
+                     "mode": "raw",
+                     "raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+                  },
+                  "url": {
+                     "raw": "{{base_url}}/api/auth/register",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "auth",
+                        "register"
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Login",
+               "request": {
+                  "method": "POST",
+                  "header": [
+                     {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                     }
+                  ],
+                  "body": {
+                     "mode": "raw",
+                     "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+                  },
+                  "url": {
+                     "raw": "{{base_url}}/api/auth/login",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "auth",
+                        "login"
+                     ]
+                  }
+               }
+            }
+         ]
+      },
+      {
+         "name": "2. Users (Admin Only)",
+         "item": [
+            {
+               "name": "Get All Users",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{admin_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                     "raw": "{{base_url}}/api/users",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "users"
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Update User Role",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{admin_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "PUT",
+                  "header": [
+                     {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                     }
+                  ],
+                  "body": {
+                     "mode": "raw",
+                     "raw": "{\n    \"role\": \"Analyst\",\n    \"status\": \"Active\"\n}"
+                  },
+                  "url": {
+                     "raw": "{{base_url}}/api/users/REPLACE_WITH_USER_ID/role",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "users",
+                        "REPLACE_WITH_USER_ID",
+                        "role"
+                     ]
+                  }
+               }
+            }
+         ]
+      },
+      {
+         "name": "3. Records (CRUD)",
+         "item": [
+            {
+               "name": "Create Record (Admin Only)",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{admin_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "POST",
+                  "header": [
+                     {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                     }
+                  ],
+                  "body": {
+                     "mode": "raw",
+                     "raw": "{\n    \"amount\": 1500,\n    \"type\": \"income\",\n    \"category\": \"Salary\",\n    \"date\": \"2026-04-02T00:00:00.000Z\",\n    \"notes\": \"Monthly salary payment\"\n}"
+                  },
+                  "url": {
+                     "raw": "{{base_url}}/api/records",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "records"
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Get All Records",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{viewer_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                     "raw": "{{base_url}}/api/records?page=1&limit=10&sort=-amount",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "records"
+                     ],
+                     "query": [
+                        {
+                           "key": "page",
+                           "value": "1"
+                        },
+                        {
+                           "key": "limit",
+                           "value": "10"
+                        },
+                        {
+                           "key": "sort",
+                           "value": "-amount"
+                        }
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Get Single Record",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{viewer_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                     "raw": "{{base_url}}/api/records/REPLACE_WITH_RECORD_ID",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "records",
+                        "REPLACE_WITH_RECORD_ID"
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Update Record (Admin Only)",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{admin_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "PUT",
+                  "header": [
+                     {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                     }
+                  ],
+                  "body": {
+                     "mode": "raw",
+                     "raw": "{\n    \"amount\": 600,\n    \"type\": \"expense\",\n    \"category\": \"Stocks Loss\"\n}"
+                  },
+                  "url": {
+                     "raw": "{{base_url}}/api/records/REPLACE_WITH_RECORD_ID",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "records",
+                        "REPLACE_WITH_RECORD_ID"
+                     ]
+                  }
+               }
+            },
+            {
+               "name": "Delete Record (Admin Only)",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{admin_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "DELETE",
+                  "header": [],
+                  "url": {
+                     "raw": "{{base_url}}/api/records/REPLACE_WITH_RECORD_ID",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "records",
+                        "REPLACE_WITH_RECORD_ID"
+                     ]
+                  }
+               }
+            }
+         ]
+      },
+      {
+         "name": "4. Dashboard Summaries",
+         "item": [
+            {
+               "name": "Get Summary (Analyst/Admin)",
+               "request": {
+                  "auth": {
+                     "type": "bearer",
+                     "bearer": [
+                        {
+                           "key": "token",
+                           "value": "{{analyst_token}}",
+                           "type": "string"
+                        }
+                     ]
+                  },
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                     "raw": "{{base_url}}/api/dashboard/summary",
+                     "host": [
+                        "{{base_url}}"
+                     ],
+                     "path": [
+                        "api",
+                        "dashboard",
+                        "summary"
+                     ]
+                  }
+               }
+            }
+         ]
+      }
+   ],
+   "variable": [
+      {
+         "key": "base_url",
+         "value": "https://capitalguard-backend.onrender.com"
+      },
+      {
+         "key": "admin_token",
+         "value": "PASTE_ADMIN_TOKEN_HERE"
+      },
+      {
+         "key": "analyst_token",
+         "value": "PASTE_ANALYST_TOKEN_HERE"
+      },
+      {
+         "key": "viewer_token",
+         "value": "PASTE_VIEWER_TOKEN_HERE"
+      }
+   ]
+}

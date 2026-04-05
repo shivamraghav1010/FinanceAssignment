@@ -1,8 +1,8 @@
 const Record = require('../models/Record');
 
-// @desc    Create a new record
-// @route   POST /api/records
-// @access  Private/Admin
+//Create a new record
+//POST /api/records
+//Private/Admin
 exports.createRecord = async (req, res, next) => {
   try {
     req.body.createdBy = req.user.id;
@@ -13,9 +13,9 @@ exports.createRecord = async (req, res, next) => {
   }
 };
 
-// @desc    Get all records with optional filtering & pagination
-// @route   GET /api/records
-// @access  Private (Viewer, Analyst, Admin)
+//Get all records with optional filtering & pagination
+// GET /api/records
+//Private (Viewer, Analyst, Admin)
 exports.getRecords = async (req, res, next) => {
   try {
     let query;
@@ -74,9 +74,9 @@ exports.getRecords = async (req, res, next) => {
   }
 };
 
-// @desc    Get single record
-// @route   GET /api/records/:id
-// @access  Private (Viewer, Analyst, Admin)
+// Get single record
+//GET /api/records/:id
+// Private (Viewer, Analyst, Admin)
 exports.getRecord = async (req, res, next) => {
   try {
     const record = await Record.findById(req.params.id).populate('createdBy', 'name email');
@@ -89,9 +89,9 @@ exports.getRecord = async (req, res, next) => {
   }
 };
 
-// @desc    Update record
-// @route   PUT /api/records/:id
-// @access  Private/Admin
+// Update record
+// PUT /api/records/:id
+//Private/Admin
 exports.updateRecord = async (req, res, next) => {
   try {
     let record = await Record.findById(req.params.id);
@@ -111,9 +111,9 @@ exports.updateRecord = async (req, res, next) => {
   }
 };
 
-// @desc    Delete record
-// @route   DELETE /api/records/:id
-// @access  Private/Admin
+// Delete record
+// DELETE /api/records/:id
+//Private/Admin
 exports.deleteRecord = async (req, res, next) => {
   try {
     const record = await Record.findById(req.params.id);

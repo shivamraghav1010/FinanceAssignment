@@ -3,14 +3,13 @@ const jwt = require('jsonwebtoken');
 
 // Generate JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET || 'your_super_secret_jwt_key_here', {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d'
   });
 };
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
+//  Register a new user
+//   POST /api/auth/register
 exports.register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -46,9 +45,8 @@ exports.register = async (req, res, next) => {
   }
 };
 
-// @desc    Authenticate a user
-// @route   POST /api/auth/login
-// @access  Public
+//Authenticate a user
+//POST /api/auth/login
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;

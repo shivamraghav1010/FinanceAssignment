@@ -1,5 +1,7 @@
 # Finance Data Processing and Access Control Backend
 
+> **Live API Base URL:** [https://capitalguard-backend.onrender.com]
+
 ## Overview
 This is a Node.js and Express backend for a finance dashboard system. It supports storing financial records, managing users with Role-Based Access Control (RBAC), and generating summary aggregations for a dashboard. Data is persisted in MongoDB.
 
@@ -35,7 +37,7 @@ This is a Node.js and Express backend for a finance dashboard system. It support
    ```env
    PORT=5000
    MONGO_URI=mongodb://localhost:27017/finance_dev
-   JWT_SECRET=your_super_secret_jwt_key_here
+   JWT_SECRET=Finance
    ```
 4. Start the server:
    ```bash
@@ -43,6 +45,15 @@ This is a Node.js and Express backend for a finance dashboard system. It support
    # or
    npm start
    ```
+
+## 🔑 Demo Accounts for Reviewers
+To easily test the Role-Based Access Control logic without needing database access, you can log in using the following pre-configured demo accounts. The password for all accounts is `123456`:
+
+| Role | Email |
+| :--- | :--- |
+| **Admin** | `admin@test.com` |
+| **Analyst** | `analyst@test.com` |
+| **Viewer** | `viewer@test.com` |
 
 ## Role Permissions Summary
 
@@ -70,6 +81,8 @@ The `Admin` has unrestricted access, including data mutation and user management
 - `PUT /api/users/:id/role` (Update user role/status)
 
 ## Postman / API Testing
+
+> **💡 Quick Start:** I have included an exported Postman Collection in this repository (`CapitalGuard_Postman_Collection.json`). Simply import this file into your Postman app, and you will instantly have all the pre-configured routes, bodies, and headers ready to test!
 
 ### Authentication
 - `POST /api/auth/register` (Register - standard users become viewers)
